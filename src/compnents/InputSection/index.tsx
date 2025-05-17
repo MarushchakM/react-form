@@ -1,13 +1,17 @@
+import './inputSection.module.scss';
+
 type Props = {
   title: string;
   children?: React.ReactNode;
 }
 
-export const InputSection: React.FC<Props> = ({ title, children  }) => {
+export const InputSection: React.FC<Props> = ({ title, children }) => {
   return (
-    <section>
+    <section className="form-section">
       <h2>{title}</h2>
-      {children}
+      <div className="input-wrapper">
+        {children}
+      </div>
     </section>
   );
 };
