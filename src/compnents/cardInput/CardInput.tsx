@@ -23,6 +23,8 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
   const [inputValue, setInputValue] = useState('');
   const [typeCard, setTypeCard] = useState('Unknown');
 
+  const snakeCaseName = name.toLowerCase().split(' ').join('-');
+
   useEffect(() => {
     setTypeCard(getCardType(inputValue));
   }, [inputValue])
@@ -46,10 +48,10 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
 
     const valueForForm = formattedValue.replace(/\s/g, '');
 
-    setValue(name, valueForForm, { shouldValidate: true, shouldDirty: true });
+    console.log(snakeCaseName, valueForForm);
+    setValue(snakeCaseName, valueForForm, { shouldValidate: true, shouldDirty: true });
   }
 
-  console.log(inputValue.replace(/\s/g, ''), inputValue.replace(/\s/g, '').length)
   return (
     <div className={style['wrapper']}>
         <div className={style['icon-wrapper']}>
@@ -64,7 +66,6 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
       <Input 
         name={name} 
         placeholder={placeholder} 
-        value={inputValue}
         onChange={handleMaskedInputChange} 
       />
     </div>
