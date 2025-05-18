@@ -1,10 +1,11 @@
 import { useFormContext } from "react-hook-form";
 import React, { useEffect, useState } from "react";
+import { Input } from "../Input";
+import style from './CardInput.module.scss';
 
 type Props = {
   name: string;
   placeholder: string;
-  onQuestion: (isFocused: boolean) => void;
 }
 
 function getCardType(cardNumber: string): string {
@@ -17,8 +18,8 @@ function getCardType(cardNumber: string): string {
   return 'Unknown';
 }
 
-export const InputCard: React.FC<Props> = ({ name, placeholder, onQuestion }) => {
-  const { register, setValue } = useFormContext();
+export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
+  const { setValue } = useFormContext();
   const [inputValue, setInputValue] = useState('');
   const [typeCard, setTypeCard] = useState('Unknown');
 
@@ -48,29 +49,24 @@ export const InputCard: React.FC<Props> = ({ name, placeholder, onQuestion }) =>
     setValue(name, valueForForm, { shouldValidate: true, shouldDirty: true });
   }
 
+  console.log(inputValue.replace(/\s/g, ''), inputValue.replace(/\s/g, '').length)
   return (
-    <>
-      {typeCard !== 'Unknown' && (
-        <div className="card-icon-wrapper">
-          {typeCard === 'MasterCard' && (
-            <img className="masterCard" src="masterCard.png" alt="MasterCard" />
+    <div className={style['wrapper']}>
+        <div className={style['icon-wrapper']}>
+          {typeCard === 'MasterCard' || typeCard ==='Unknown' && (
+            <img className={style['icon']} src="masterCard.png" alt="MasterCard" />
           )}
-          {typeCard === 'MasterCard' && (
-            <img className="icon" src="visa.png" alt="visa" />
+          {typeCard === 'Visa' && (
+            <img className={style['icon']} src="visa.png" alt="visa" />
           )}
         </div>
-      )}
       
-      <input
-        className="card-input"
-        type='text'
-        placeholder={placeholder}
-        {...register(name)}
-        onFocus={() => onQuestion(true)} 
-        onBlur={() => onQuestion(false)}
+      <Input 
+        name={name} 
+        placeholder={placeholder} 
         value={inputValue}
-        onChange={handleMaskedInputChange}
-      /> 
-    </>
+        onChange={handleMaskedInputChange} 
+      />
+    </div>
   )
 }

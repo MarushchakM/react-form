@@ -1,4 +1,3 @@
-// import { Form } from 'react-hook-form';
 import './App.scss';
 import { Form } from './compnents/Form';
 

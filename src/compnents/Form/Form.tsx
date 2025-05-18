@@ -1,10 +1,11 @@
-import { InputType } from "../../enums/InputType";
-import { FormController } from "../Input/FormController";
-import { InputSection } from "../InputSection";
+import { InputSection } from "../inputSection";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../../schemas/formValidation';
-import './form.scss';
+import styles from'./Form.module.scss';
+import { Input } from "../Input";
+import { CardInput } from "../cardInput";
+import { Select } from "../select";
 
 
 
@@ -21,32 +22,34 @@ export const Form = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className="form" onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className={styles['form']} onSubmit={methods.handleSubmit(onSubmit)}>
         <InputSection title="Payment details">
-          <FormController name={'Card number'} type={InputType.CARD} placeholder="1234 1234 1234 1234" />
-          {/* <FormController name={'Cardholder name'} type={InputType.TEXT} placeholder="Full name on card" />
-          <div className="wrapper">
-            <FormController name={'Expiry'} type={InputType.TEXT} placeholder="MM/YY" />
-            <FormController name={'CVV'} type={InputType.NUMBER} placeholder="123" />
-          </div> */}
+          <CardInput name={'Card number'} placeholder="1234 1234 1234 1234" />
+          <Input name={'Cardholder name'} placeholder="Full name on card" />
+          <div className={styles['wrapper']}>
+            <Input name={'Expiry'} placeholder="MM/YY" />
+            <Input name={'CVV'} placeholder="123" />
+          </div>
         </InputSection>
 
-        {/* <InputSection title="Email address">
-          <Input name={'Email'} type={InputType.EMAIL} placeholder="user@example.com"/>
+         <InputSection title="Email address">
+          <Input name={'Email'} placeholder="user@example.com"/>
         </InputSection>
 
         <InputSection title="Address details">
-          <Input name={'Country / Region'} placeholder="United States"/>
-          <Input name={'Address'} placeholder="Street address"/>
-          <Input name={'Address2'} placeholder="Apartment, suite, etc (optional)" isLabel={false} />
-          <div className="wrapper">
-            <Input name={'City'} placeholder="City"/>
-            <Input name={'State'} placeholder="State" type={InputType.SELECT}/>
-            <Input name={'Zip'} placeholder="123" type={InputType.NUMBER}/>
+          <Input name={'Country / Region'} placeholder="United States" />
+          <div>
+            <Input name={'Address'} placeholder="Street address"/>
+            <Input name={'Address2'} placeholder="Apartment, suite, etc (optional)" isLabel={false} />
           </div>
-        </InputSection> */}
+          <div className={styles['wrapper']}>
+            <Input name={'City'} placeholder="City"/>
+            <Select name={'State'} placeholder="State"/>
+            <Input name={'Zip'} placeholder="123"/>
+          </div>
+        </InputSection> 
 
-        <button type="submit">Save changes</button>
+        <button className={styles['button']} type="submit">Save changes</button>
       </form>
     </FormProvider>
     

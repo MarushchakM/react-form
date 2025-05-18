@@ -1,0 +1,26 @@
+@use '../../style/variable.scss' as vars;
+
+.wrapper {
+  position: relative;
+
+  input {
+    padding-left: 56px;
+  }
+
+  .icon-wrapper{
+    width: 34px;
+    height: 24px;
+    border-radius: 2px;
+    border: 1px solid vars.$input-border-color;
+    position: absolute;
+    top: 33px;
+    left: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon{
+      max-width: 100%;
+      padding: 2px 4px;
+    }
+  }  
+}
