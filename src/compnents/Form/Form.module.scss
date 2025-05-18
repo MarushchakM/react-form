@@ -5,6 +5,9 @@
   .wrapper {
     display: flex;
     gap: 32px;
+    > * {
+      flex: 1;
+    }
   }
   .button {
     border: none;
