@@ -6,9 +6,10 @@ type Props = {
   isLabel?: boolean;
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
-export const Input: React.FC<Props> = ({ name, placeholder, isLabel = true, onChange }) => {
+export const Input: React.FC<Props> = ({ name, placeholder, isLabel = true, onChange, value }) => {
   const { register, formState: { errors } } = useFormContext();
 
   const snakeCaseName = name.toLowerCase().split(' ').join('-');
@@ -23,6 +24,7 @@ export const Input: React.FC<Props> = ({ name, placeholder, isLabel = true, onCh
           placeholder={placeholder} 
           {...register(snakeCaseName)}
           onChange={onChange}
+          value={value}
         /> 
       {hasError && <p className={style['error-message']}>{errorMessage}</p>}
     </label>

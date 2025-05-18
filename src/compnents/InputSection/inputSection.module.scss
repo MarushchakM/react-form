@@ -1,8 +1,15 @@
 @use '../../style/variable.scss' as vars;
+@use '../../style/mixins' as mixins;
 
 .section {
   padding: 16px 0;
   border-bottom: 1px solid vars.$input-border-color;
+  @include mixins.on-tablet {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    justify-content: space-between;
+  }
   h2 {
     margin-bottom: 24px;
   }

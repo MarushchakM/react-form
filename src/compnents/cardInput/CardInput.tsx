@@ -66,6 +66,7 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
       <Input 
         name={name} 
         placeholder={placeholder} 
+        value={inputValue}
         onChange={handleMaskedInputChange} 
       />
     </div>
