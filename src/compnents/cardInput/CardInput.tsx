@@ -29,7 +29,9 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
   console.log(watchedValue);
 
   useEffect(() => {
-    setTypeCard(getCardType(watchedValue));
+    if (watchedValue) {
+      setTypeCard(getCardType(watchedValue));
+    }
   }, [watchedValue])
 
   const handleMaskedInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
