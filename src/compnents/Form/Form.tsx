@@ -13,7 +13,7 @@ export const Form = () => {
 
   const methods = useForm({
     resolver: yupResolver(validationSchema),
-    mode: 'onTouched',
+    mode: 'onBlur',
   });
 
   const onSubmit = (data: unknown) => {

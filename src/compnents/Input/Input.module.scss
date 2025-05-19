@@ -21,4 +21,17 @@
         0 1px 2px rgba(vars.$shadow-color-dark, 0.05);
     }
   }
+  .error {
+    border-color: vars.$danger-color;
+    &:focus{
+      border-color: vars.$danger-color;
+      box-shadow:
+        0 0 0 4px rgba(vars.$danger-color, 0.12),
+        0 1px 2px rgba(vars.$shadow-color-dark, 0.05);
+    }
+  }
+  .error-message {
+    color: vars.$danger-color;
+    margin-top: 6px;
+  }
 }

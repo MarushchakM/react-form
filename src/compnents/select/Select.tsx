@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import USStateFullName from "../../enums/USStateFullName";
 import style from './Select.module.scss';
+import classNames from "classnames";
 
 type Props = {
   name: string;
@@ -17,8 +18,12 @@ export const Select: React.FC<Props> = ({ name, placeholder }) => {
   return (
     <label className={style.label}>
       {name}
-      <select {...register(snakeCaseName)}>
-        <option className={style.placeholder} value="" disabled selected>{placeholder}</option>
+      <select {...register(snakeCaseName)} className={classNames({ [style.error]: hasError })}>
+        <option
+          className={style.placeholder}
+          value="" disabled
+          selected
+        >{placeholder}</option>
           {Object.values(USStateFullName).map((stateName) => (
             <option key={stateName} value={stateName}>
               {stateName}

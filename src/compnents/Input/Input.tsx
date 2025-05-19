@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import style from './Input.module.scss';
+import classNames from "classnames";
 
 type Props = {
   name: string;
@@ -16,18 +17,16 @@ export const Input: React.FC<Props> = ({ name, placeholder, isLabel = true }) =>
   const hasError = !!errors[snakeCaseName];
   const errorMessage = hasError ? (errors[snakeCaseName]?.message as string) : '';
 
-  const registrationProps = register(snakeCaseName);
-  
   return (
     <label className={style.label}>
       {isLabel && name}
-        <input 
+      
+      <input 
+          className={classNames({[style.error] : hasError})}
           type='text' 
           placeholder={placeholder} 
-          // {...register(snakeCaseName)}
-          // onChange={onChange}
-        // value={value}
-        {...registrationProps}
+          {...register(snakeCaseName)}
+          
         /> 
       {hasError && <p className={style['error-message']}>{errorMessage}</p>}
     </label>

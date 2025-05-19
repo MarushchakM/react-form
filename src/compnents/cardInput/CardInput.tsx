@@ -48,7 +48,6 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
 
     const valueForForm = formattedValue.replace(/\s/g, '');
 
-    console.log(snakeCaseName, valueForForm);
     setValue(snakeCaseName, valueForForm, { shouldValidate: true, shouldDirty: true });
   }
 
