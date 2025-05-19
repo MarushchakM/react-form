@@ -7,9 +7,9 @@ type Props = {
 
 export const InputSection: React.FC<Props> = ({ title, children }) => {
   return (
-    <section className={styles['section']}>
+    <section className={styles.section}>
       <h2>{title}</h2>
-      <div className={styles['wrapper']}>
+      <div className={styles.wrapper}>
         {children}
       </div>
     </section>

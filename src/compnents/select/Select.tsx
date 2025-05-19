@@ -15,10 +15,10 @@ export const Select: React.FC<Props> = ({ name, placeholder }) => {
   const errorMessage = hasError ? (errors[snakeCaseName]?.message as string) : '';
 
   return (
-    <label className={style['label']}>
+    <label className={style.label}>
       {name}
       <select {...register(snakeCaseName)}>
-        <option className={style['placeholder']} value="" disabled selected>{placeholder}</option>
+        <option className={style.placeholder} value="" disabled selected>{placeholder}</option>
           {Object.values(USStateFullName).map((stateName) => (
             <option key={stateName} value={stateName}>
               {stateName}

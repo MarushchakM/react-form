@@ -22,11 +22,11 @@ export const Form = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className={styles['form']} onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
         <InputSection title="Payment details">
           <CardInput name={'Card number'} placeholder="1234 1234 1234 1234" />
-          <Input name={'Cardholder name'} placeholder="Full name on card" />
-          <div className={styles['wrapper']}>
+          <Input name={'Cardholder name'} placeholder="Full name on card"/>
+          <div className={styles.wrapper}>
             <Input name={'Expiry'} placeholder="MM/YY" />
             <Input name={'CVV'} placeholder="123" />
           </div>
@@ -42,14 +42,14 @@ export const Form = () => {
             <Input name={'Address'} placeholder="Street address"/>
             <Input name={'Address2'} placeholder="Apartment, suite, etc (optional)" isLabel={false} />
           </div>
-          <div className={styles['wrapper']}>
+          <div className={styles.wrapper}>
             <Input name={'City'} placeholder="City"/>
             <Select name={'State'} placeholder="State"/>
             <Input name={'Zip'} placeholder="123"/>
           </div>
         </InputSection> 
 
-        <button className={styles['button']} type="submit">Save changes</button>
+        <button className={styles.button} type="submit">Save changes</button>
       </form>
     </FormProvider>
     

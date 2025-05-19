@@ -53,13 +53,13 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
   }
 
   return (
-    <div className={style['wrapper']}>
+    <div className={style.wrapper}>
         <div className={style['icon-wrapper']}>
           {typeCard === 'MasterCard' || typeCard ==='Unknown' && (
-            <img className={style['icon']} src="masterCard.png" alt="MasterCard" />
+            <img className={style.icon} src="masterCard.png" alt="MasterCard" />
           )}
           {typeCard === 'Visa' && (
-            <img className={style['icon']} src="visa.png" alt="visa" />
+            <img className={style.icon} src="visa.png" alt="visa" />
           )}
         </div>
       
