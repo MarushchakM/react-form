@@ -5,7 +5,7 @@ import { validationSchema } from '../../schemas/formValidation';
 import styles from'./Form.module.scss';
 import { Input } from "../Input";
 import { CardInput } from "../cardInput";
-// import { Select } from "../select";
+import { Select } from "../select";
 
 export const Form = () => {
 
@@ -22,15 +22,15 @@ export const Form = () => {
     <FormProvider {...methods}>
       <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
         <InputSection title="Payment details">
-          <CardInput name={'Card number'} placeholder="1234 1234 1234 1234" />
+          <CardInput name={'Card number'} placeholder="1234 1234 1234 1234" mask="0000 0000 0000 0000" />
           <Input name={'Cardholder name'} placeholder="Full name on card"/>
           <div className={styles.wrapper}>
-            <Input name={'Expiry'} placeholder="MM/YY" />
-            <Input name={'CVV'} placeholder="123" />
+            <Input name={'Expiry'} placeholder="MM/YY" mask="00/00"/>
+            <Input name={'CVV'} placeholder="123" mask="000"/>
           </div>
         </InputSection>
 
-         {/* <InputSection title="Email address">
+        <InputSection title="Email address">
           <Input name={'Email'} placeholder="user@example.com"/>
         </InputSection>
 
@@ -43,9 +43,9 @@ export const Form = () => {
           <div className={styles.wrapper}>
             <Input name={'City'} placeholder="City"/>
             <Select name={'State'} placeholder="State"/>
-            <Input name={'Zip'} placeholder="123"/>
+            <Input name={'Zip'} placeholder="123" mask='00000'/>
           </div>
-        </InputSection>  */}
+        </InputSection>
 
         <button className={styles.button} type="submit">Save changes</button>
       </form>

@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export const validationSchema = yup.object().shape({
   'card-number': yup.string()
     .required('Card number is required')
-    .matches(/^\d{16}$/, 'Card number must be 16 digits'),
+    .max(19, 'Card number cannot exceed 16 digits'),
   'cardholder-name': yup.string()
     .required('Cardholder name is required')
     .min(2, 'Cardholder name must be at least 2 characters')
@@ -44,6 +44,6 @@ export const validationSchema = yup.object().shape({
     .test('not-empty', 'Please select a state', (value) => value !== '' && value !== undefined),
   'zip': yup.string()
     .required('Zip code is required')
-    .matches(/^\d{5}(-\d{4})?$/, 'Invalid Zip Code format (e.g., 12345 or 12345-6789)'),
+    .matches(/^\d{5}$/, 'Zip code must be exactly 5 digits'),
   
 });

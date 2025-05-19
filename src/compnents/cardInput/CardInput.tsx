@@ -1,4 +1,4 @@
-import { useFormContext, useWatch } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { Input } from "../Input";
 import style from './CardInput.module.scss';
@@ -6,6 +6,7 @@ import style from './CardInput.module.scss';
 type Props = {
   name: string;
   placeholder: string;
+  mask: string;
 }
 
 function getCardType(cardNumber: string): string {
@@ -18,43 +19,17 @@ function getCardType(cardNumber: string): string {
   return 'Unknown';
 }
 
-export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
-  const { setValue } = useFormContext();
-  const [inputValue, setInputValue] = useState('');
+export const CardInput: React.FC<Props> = ({ name, placeholder, mask }) => {
   const [typeCard, setTypeCard] = useState('Unknown');
 
   const snakeCaseName = name.toLowerCase().split(' ').join('-');
   const watchedValue = useWatch({ name: snakeCaseName });
-
-  console.log(watchedValue);
 
   useEffect(() => {
     if (watchedValue) {
       setTypeCard(getCardType(watchedValue));
     }
   }, [watchedValue])
-
-  const handleMaskedInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '');
-
-    let formattedValue = '';
-    for (let i = 0; i < value.length; i++) {
-      if (i > 0 && i % 4 === 0) {
-        formattedValue += ' ';
-      }
-      formattedValue += value[i];
-    }
-
-    if (formattedValue.length > 19) {
-      formattedValue = formattedValue.substring(0, 19);
-    }
-
-    setInputValue(formattedValue);
-
-    const valueForForm = formattedValue.replace(/\s/g, '');
-
-    setValue(snakeCaseName, valueForForm, { shouldValidate: true, shouldDirty: true });
-  }
 
   return (
     <div className={style.wrapper}>
@@ -67,12 +42,12 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
           )}
         </div>
       
-      <Input 
-        name={name} 
-        placeholder={placeholder} 
-        value={inputValue}
-        onChange={handleMaskedInputChange} 
+      <Input
+        name={name}
+        placeholder={placeholder}
+        mask={mask}
       />
     </div>
   )
 }
+
