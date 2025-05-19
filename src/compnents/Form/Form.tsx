@@ -5,9 +5,7 @@ import { validationSchema } from '../../schemas/formValidation';
 import styles from'./Form.module.scss';
 import { Input } from "../Input";
 import { CardInput } from "../cardInput";
-import { Select } from "../select";
-
-
+// import { Select } from "../select";
 
 export const Form = () => {
 
@@ -32,7 +30,7 @@ export const Form = () => {
           </div>
         </InputSection>
 
-         <InputSection title="Email address">
+         {/* <InputSection title="Email address">
           <Input name={'Email'} placeholder="user@example.com"/>
         </InputSection>
 
@@ -47,7 +45,7 @@ export const Form = () => {
             <Select name={'State'} placeholder="State"/>
             <Input name={'Zip'} placeholder="123"/>
           </div>
-        </InputSection> 
+        </InputSection>  */}
 
         <button className={styles.button} type="submit">Save changes</button>
       </form>

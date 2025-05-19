@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { Input } from "../Input";
 import style from './CardInput.module.scss';
@@ -24,10 +24,13 @@ export const CardInput: React.FC<Props> = ({ name, placeholder }) => {
   const [typeCard, setTypeCard] = useState('Unknown');
 
   const snakeCaseName = name.toLowerCase().split(' ').join('-');
+  const watchedValue = useWatch({ name: snakeCaseName });
+
+  console.log(watchedValue);
 
   useEffect(() => {
-    setTypeCard(getCardType(inputValue));
-  }, [inputValue])
+    setTypeCard(getCardType(watchedValue));
+  }, [watchedValue])
 
   const handleMaskedInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, '');
