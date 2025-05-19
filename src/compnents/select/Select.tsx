@@ -2,13 +2,15 @@ import { useFormContext } from "react-hook-form";
 import USStateFullName from "../../enums/USStateFullName";
 import style from './Select.module.scss';
 import classNames from "classnames";
+import type { IForm } from "../../enums/IForm";
 
 type Props = {
-  name: string;
+  name: keyof IForm;
+  label: string;
   placeholder: string;
 }
 
-export const Select: React.FC<Props> = ({ name, placeholder }) => {
+export const Select: React.FC<Props> = ({ name, label, placeholder }) => {
   const { register, formState: { errors } } = useFormContext();
   
   const snakeCaseName = name.toLowerCase().split(' ').join('-');
@@ -17,7 +19,7 @@ export const Select: React.FC<Props> = ({ name, placeholder }) => {
 
   return (
     <label className={style.label}>
-      {name}
+      {label}
       <select {...register(snakeCaseName)} className={classNames({ [style.error]: hasError })}>
         <option
           className={style.placeholder}

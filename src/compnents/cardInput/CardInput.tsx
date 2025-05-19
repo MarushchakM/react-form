@@ -2,9 +2,11 @@ import { useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { Input } from "../Input";
 import style from './CardInput.module.scss';
+import type { IForm } from "../../enums/IForm";
 
 type Props = {
-  name: string;
+  name: keyof IForm;
+  label: string;
   placeholder: string;
   mask: string;
 }
@@ -19,7 +21,7 @@ function getCardType(cardNumber: string): string {
   return 'Unknown';
 }
 
-export const CardInput: React.FC<Props> = ({ name, placeholder, mask }) => {
+export const CardInput: React.FC<Props> = ({ name, label, placeholder, mask }) => {
   const [typeCard, setTypeCard] = useState('Unknown');
 
   const snakeCaseName = name.toLowerCase().split(' ').join('-');
@@ -44,6 +46,7 @@ export const CardInput: React.FC<Props> = ({ name, placeholder, mask }) => {
       
       <Input
         name={name}
+        label={label}
         placeholder={placeholder}
         mask={mask}
       />

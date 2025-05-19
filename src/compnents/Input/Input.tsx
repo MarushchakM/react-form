@@ -2,38 +2,56 @@ import { Controller, useFormContext } from "react-hook-form";
 import style from './Input.module.scss';
 import classNames from "classnames";
 import { IMaskInput } from "react-imask";
+import type { IForm } from "../../enums/IForm";
 
 type Props = {
-  name: string;
+  name: keyof IForm;
+  label: string;
   isLabel?: boolean;
   placeholder: string;
   mask?: string;
 }
 
-export const Input: React.FC<Props> = ({ name, placeholder, isLabel = true, mask }) => {
-  const { register, formState: { errors }, control } = useFormContext();
+export const Input: React.FC<Props> = ({ name, label, placeholder, mask }) => {
+  const { formState: { errors }, control } = useFormContext();
 
-  const snakeCaseName = name.toLowerCase().split(' ').join('-');
-  const hasError = !!errors[snakeCaseName];
-  const errorMessage = hasError ? (errors[snakeCaseName]?.message as string) : '';
+  const hasError = !!errors[name];
+  const errorMessage = hasError ? (errors[name]?.message as string) : '';
 
   return (
     <label className={style.label}>
-      {isLabel && name}
+      {label}
 
       <Controller
-        {...register(snakeCaseName)}
+        name={name}
         control={control}
-        render={({ field }) => (
-          <IMaskInput
-            {...field}
-            mask={mask}
-            unmask={true}
-            placeholder={placeholder} 
-            className={classNames({[style.error] : hasError})}
-          />
+        render={({ field: { onChange, onBlur, value, ref } }) => (
+          mask ? (
+            <IMaskInput
+              name={name}
+              mask={mask}
+              unmask={true}
+              placeholder={placeholder}
+              value={value}
+              onAccept={(val: string) => onChange(val)}
+              onBlur={onBlur}
+              inputRef={ref}
+              className={classNames({ [style.error]: hasError })}
+            />
+          ) : (
+            <input
+              name={name}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              ref={ref}
+              className={classNames({ [style.error]: hasError })}
+            />
+          )
         )}
       />
+
       {hasError && <p className={style['error-message']}>{errorMessage}</p>}
     </label>
   )
