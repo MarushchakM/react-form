@@ -1,9 +1,9 @@
 @use '../../style/variable.scss' as vars;
 
-.wrapper {
+.wrapperCard {
   position: relative;
 
-  input {
+  input[name="card"] {
     padding-left: 56px;
   }
 

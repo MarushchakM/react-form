@@ -34,15 +34,15 @@ export const CardInput: React.FC<Props> = ({ name, label, placeholder, mask }) =
   }, [watchedValue])
 
   return (
-    <div className={style.wrapper}>
-        <div className={style['icon-wrapper']}>
-          {typeCard === 'MasterCard' || typeCard ==='Unknown' && (
-            <img className={style.icon} src="masterCard.png" alt="MasterCard" />
-          )}
-          {typeCard === 'Visa' && (
-            <img className={style.icon} src="visa.png" alt="visa" />
-          )}
-        </div>
+    <div className={style.wrapperCard}>
+      <div className={style['icon-wrapper']}>
+        {typeCard === 'MasterCard' || typeCard ==='Unknown' && (
+          <img className={style.icon} src="masterCard.png" alt="MasterCard" />
+        )}
+        {typeCard === 'Visa' && (
+          <img className={style.icon} src="visa.png" alt="visa" />
+        )}
+      </div>
       
       <Input
         name={name}
