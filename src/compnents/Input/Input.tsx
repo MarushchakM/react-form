@@ -19,40 +19,42 @@ export const Input: React.FC<Props> = ({ name, label, placeholder, mask }) => {
   const errorMessage = hasError ? (errors[name]?.message as string) : '';
 
   return (
-    <label className={style.label}>
-      {label}
+    <div className={style.wrapper}>
+      <label className={style.label}>
+        {label}
 
-      <Controller
-        name={name}
-        control={control}
-        render={({ field: { onChange, onBlur, value, ref } }) => (
-          mask ? (
-            <IMaskInput
-              name={name}
-              mask={mask}
-              unmask={true}
-              placeholder={placeholder}
-              value={value}
-              onAccept={(val: string) => onChange(val)}
-              onBlur={onBlur}
-              inputRef={ref}
-              className={classNames({ [style.error]: hasError })}
-            />
-          ) : (
-            <input
-              name={name}
-              placeholder={placeholder}
-              value={value}
-              onChange={onChange}
-              onBlur={onBlur}
-              ref={ref}
-              className={classNames({ [style.error]: hasError })}
-            />
-          )
-        )}
-      />
-
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, onBlur, value, ref } }) => (
+            mask ? (
+              <IMaskInput
+                name={name}
+                mask={mask}
+                unmask={true}
+                placeholder={placeholder}
+                value={value}
+                onAccept={(val: string) => onChange(val)}
+                onBlur={onBlur}
+                inputRef={ref}
+                className={classNames({ [style.error]: hasError })}
+              />
+            ) : (
+              <input
+                name={name}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                ref={ref}
+                className={classNames({ [style.error]: hasError })}
+              />
+            )
+          )}
+        />
+      </label>
       {hasError && <p className={style['error-message']}>{errorMessage}</p>}
-    </label>
+    </div>
+
   )
 }

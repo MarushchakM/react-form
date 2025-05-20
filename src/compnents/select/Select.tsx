@@ -18,21 +18,24 @@ export const Select: React.FC<Props> = ({ name, label, placeholder }) => {
   const errorMessage = hasError ? (errors[snakeCaseName]?.message as string) : '';
 
   return (
-    <label className={style.label}>
-      {label}
-      <select {...register(snakeCaseName)} className={classNames({ [style.error]: hasError })}>
-        <option
-          className={style.placeholder}
-          value="" disabled
-          selected
-        >{placeholder}</option>
-          {Object.values(USStateFullName).map((stateName) => (
-            <option key={stateName} value={stateName}>
-              {stateName}
-            </option>
-          ))}
-      </select>
-      {hasError && <p className={style['error-message']}>{errorMessage}</p>}
-    </label>
+    <div className={style.wrapper}>
+      <label className={style.label}>
+        {label}
+        <select {...register(snakeCaseName)} className={classNames({ [style.error]: hasError })}>
+          <option
+            className={style.placeholder}
+            value="" disabled
+            selected
+          >{placeholder}</option>
+            {Object.values(USStateFullName).map((stateName) => (
+              <option key={stateName} value={stateName}>
+                {stateName}
+              </option>
+            ))}
+        </select>
+        
+      </label>
+      { hasError && <p className={style['error-message']}>{errorMessage}</p> }
+    </div>
   )
 }
