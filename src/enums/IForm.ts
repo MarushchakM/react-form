@@ -6,7 +6,7 @@ export type IForm = {
   email: string;
   country: string;
   address: string;
-  address2?: string;
+  address2: string;
   city: string;
   state: string;
   zip: string;

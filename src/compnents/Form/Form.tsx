@@ -1,20 +1,19 @@
 import { InputSection } from "../inputSection";
 import { useForm, FormProvider } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { validationSchema } from '../../schemas/formValidation';
-import styles from'./Form.module.scss';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { validationSchema } from "../../schemas/formValidation";
+import styles from "./Form.module.scss";
 import { Input } from "../Input";
 import { CardInput } from "../cardInput";
 import { Select } from "../select";
-import type { IForm } from "../../enums/IForm";
+import type { InferType } from "yup";
 
-
+type FormData = InferType<typeof validationSchema>;
 
 export const Form = () => {
-
-  const methods = useForm<IForm>({
+  const methods = useForm<FormData>({
     resolver: yupResolver(validationSchema),
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const onSubmit = (data: unknown) => {
@@ -25,34 +24,62 @@ export const Form = () => {
     <FormProvider {...methods}>
       <form className={styles.form} onSubmit={methods.handleSubmit(onSubmit)}>
         <InputSection title="Payment details">
-          <CardInput name={'card'} label={'Card number'} placeholder="1234 1234 1234 1234" mask="0000 0000 0000 0000" />
-           <Input name={'cardholder'} label={'Cardholder name'} placeholder="Full name on card"/>
+          <CardInput
+            name={"card"}
+            label={"Card number"}
+            placeholder="1234 1234 1234 1234"
+            mask="0000 0000 0000 0000"
+          />
+          <Input
+            name={"cardholder"}
+            label={"Cardholder name"}
+            placeholder="Full name on card"
+          />
           <div className={styles.wrapper}>
-            <Input label={'Expiry'} name={'expiry'} placeholder="MM/YY" mask="00/00"/>
-            <Input label={'CVV'} name={'cvv'} placeholder="123" mask="000"/>
+            <Input
+              label={"Expiry"}
+              name={"expiry"}
+              placeholder="MM/YY"
+              mask="00/00"
+            />
+            <Input label={"CVV"} name={"cvv"} placeholder="123" mask="000" />
           </div>
         </InputSection>
 
         <InputSection title="Email address">
-          <Input label="Email" name={'email'} placeholder="user@example.com"/>
+          <Input label="Email" name={"email"} placeholder="user@example.com" />
         </InputSection>
 
         <InputSection title="Address details">
-          <Input label="Country / Region" name={'country'} placeholder="United States" />
+          <Input
+            label="Country / Region"
+            name={"country"}
+            placeholder="United States"
+          />
           <div>
-            <Input label="Address" name={'address'} placeholder="Street address"/>
-            <Input label="" name={'address2'} placeholder="Apartment, suite, etc (optional)" isLabel={false} />
+            <Input
+              label="Address"
+              name={"address"}
+              placeholder="Street address"
+            />
+            <Input
+              label=""
+              name={"address2"}
+              placeholder="Apartment, suite, etc (optional)"
+              isLabel={false}
+            />
           </div>
           <div className={styles.wrapper}>
-            <Input label="City" name={'city'} placeholder="City"/>
-            <Select label="State" name={'state'} placeholder="State"/>
-            <Input label="Zip" name={'zip'} placeholder="123" mask='00000'/>
+            <Input label="City" name={"city"} placeholder="City" />
+            <Select label="State" name={"state"} placeholder="State" />
+            <Input label="Zip" name={"zip"} placeholder="123" mask="00000" />
           </div>
         </InputSection>
 
-        <button className={styles.button} type="submit">Save changes</button>
+        <button className={styles.button} type="submit">
+          Save changes
+        </button>
       </form>
     </FormProvider>
-    
   );
-}
+};
